@@ -35,6 +35,7 @@ public class Main {
                 default:
                     System.out.println("Please, enter valid command!");
             }
+            System.out.println();
         }
     }
 }
