@@ -8,7 +8,7 @@ public class DBConnection {
     public static Connection createConnection() {
 
         try {
-            Class.forName("com.mysql.jdbc.Driver");
+            Class.forName("com.mysql.cj.jdbc.Driver");
             String user = "root";
             String password = "root_12345";
             String url = "jdbc:mysql://localhost:3306/contactsbook?autoReconnect=true&useSSL=false";
