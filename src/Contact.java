@@ -30,14 +30,6 @@ public class Contact {
         this.age = age;
     }
 
-    public int getRowNumber() {
-        return rowNumber;
-    }
-
-    public void setRowNumber(int rowNumber) {
-        this.rowNumber = rowNumber;
-    }
-
     public String getFirstName() {
         return firstName;
     }

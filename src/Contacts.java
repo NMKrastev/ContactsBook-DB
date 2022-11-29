@@ -30,8 +30,9 @@ public class Contacts implements ContactsInterface {
         boolean isPhoneDeleted = false;
         try {
             Connection connection = DBConnection.createConnection();
-            String query = String.format("DELETE FROM contacts WHERE phoneNumber='%s'", phoneNumber);
+            String query = "DELETE FROM contacts WHERE phoneNumber=?";
             PreparedStatement preparedStatement = connection.prepareStatement(query);
+            preparedStatement.setString(1, phoneNumber);
             preparedStatement.executeUpdate();
             isPhoneDeleted = true;
         } catch (Exception e) {
@@ -41,8 +42,50 @@ public class Contacts implements ContactsInterface {
     }
 
     @Override
-    public boolean updateContact(int row, String update, int ch, Contact contact) {
-        return false;
+    public boolean updateContact(int row, String update, int command, Contact contact) {
+        boolean isUpdated = false;
+        try {
+            Connection connection = DBConnection.createConnection();
+            if (command == 1) {
+                String query = "UPDATE contacts SET firstName=? WHERE rowNumber=?";
+                PreparedStatement preparedStatement = connection.prepareStatement(query);
+                preparedStatement.setString(1, update);
+                preparedStatement.setInt(2, row);
+                preparedStatement.executeUpdate();
+                isUpdated = true;
+            } else if (command == 2) {
+                String query = "UPDATE contacts SET lastName=? WHERE rowNumber=?";
+                PreparedStatement preparedStatement = connection.prepareStatement(query);
+                preparedStatement.setString(1, update);
+                preparedStatement.setInt(2, row);
+                preparedStatement.executeUpdate();
+                isUpdated = true;
+            } else if (command == 3) {
+                String query = "UPDATE contacts SET company=? WHERE rowNumber=?";
+                PreparedStatement preparedStatement = connection.prepareStatement(query);
+                preparedStatement.setString(1, update);
+                preparedStatement.setInt(2, row);
+                preparedStatement.executeUpdate();
+                isUpdated = true;
+            } else if (command == 4) {
+                String query = "UPDATE contacts SET phoneNumber=? WHERE rowNumber=?";
+                PreparedStatement preparedStatement = connection.prepareStatement(query);
+                preparedStatement.setString(1, update);
+                preparedStatement.setInt(2, row);
+                preparedStatement.executeUpdate();
+                isUpdated = true;
+            } else if (command == 5) {
+                String query = "UPDATE contacts SET email=? WHERE rowNumber=?";
+                PreparedStatement preparedStatement = connection.prepareStatement(query);
+                preparedStatement.setString(1, update);
+                preparedStatement.setInt(2, row);
+                preparedStatement.executeUpdate();
+                isUpdated = true;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return isUpdated;
     }
 
     @Override
@@ -83,5 +126,21 @@ public class Contacts implements ContactsInterface {
             e.printStackTrace();
         }
         return isPhonePresent;
+    }
+
+    public static int getRowNumber(String phoneNumber) {
+        int rowNum = 0;
+        try {
+            Connection connection = DBConnection.createConnection();
+            String query = String.format("SELECT * FROM contacts WHERE phoneNumber='%s'", phoneNumber);
+            Statement statement = connection.createStatement();
+            ResultSet resultSet = statement.executeQuery(query);
+            if (resultSet.next()) {
+                rowNum = resultSet.getInt(1);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return rowNum;
     }
 }
