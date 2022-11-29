@@ -52,6 +52,20 @@ public class Main {
                     break;
                 case 4:
                     System.out.println("Delete contact");
+                    System.out.println("Enter phone number of the contact you wish to delete:");
+                    String deletePhone = scanner.next();
+                    System.out.println("Contacts to be deleted:");
+                    boolean isPhoneInDB = contactsInterface.showContactByPhoneNumber(deletePhone);
+                    if (!isPhoneInDB) {
+                        System.out.println("Phone number does not correspond to any contact in the contacts book\n");
+                        continue;
+                    }
+                    boolean isDeleted = contactsInterface.deleteContact(deletePhone);
+                    if (isDeleted) {
+                        System.out.println("Contact has been deleted!");
+                    } else {
+                        System.out.println("Something went wrong with deletion of contact!");
+                    }
                     break;
                 case 5:
                     System.out.println("Update contact");

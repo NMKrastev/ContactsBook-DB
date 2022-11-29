@@ -26,8 +26,18 @@ public class Contacts implements ContactsInterface {
     }
 
     @Override
-    public boolean deleteContact(int row) {
-        return false;
+    public boolean deleteContact(String phoneNumber) {
+        boolean isPhoneDeleted = false;
+        try {
+            Connection connection = DBConnection.createConnection();
+            String query = String.format("DELETE FROM contacts WHERE phoneNumber='%s'", phoneNumber);
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
+            preparedStatement.executeUpdate();
+            isPhoneDeleted = true;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return isPhoneDeleted;
     }
 
     @Override
@@ -39,7 +49,7 @@ public class Contacts implements ContactsInterface {
     public void showAllContacts() {
         try {
             Connection connection = DBConnection.createConnection();
-            String query = "select * from contacts order by firstName asc";
+            String query = "SELECT * FROM contacts ORDER BY firstName ASC";
             Statement statement = connection.createStatement();
             ResultSet resultSet = statement.executeQuery(query);
             while (resultSet.next()) {
@@ -59,7 +69,7 @@ public class Contacts implements ContactsInterface {
         boolean isPhonePresent = false;
         try {
             Connection connection = DBConnection.createConnection();
-            String query = String.format("select * from contacts where phoneNumber='%s'", phoneNumber);
+            String query = String.format("SELECT * FROM contacts WHERE phoneNumber='%s'", phoneNumber);
             Statement statement = connection.createStatement();
             ResultSet resultSet = statement.executeQuery(query);
             while (resultSet.next()) {
