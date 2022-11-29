@@ -7,7 +7,7 @@ Pre condition that you need to do in order for the application to work:</br>
 
 1. Create a locally hosted DB. I used MySQL on a port: 3306</br>
 2. Create a table with the following columns:</br>
-   * rowNumber <span style="color:darkorange">INT AUTO_INCREMENT PRIMARY KEY</span>
+   * rowNumber <span style="color:#ffa500">INT AUTO_INCREMENT PRIMARY KEY</span>
    * firstName <span style="color:darkorange">VARCHAR(20) NOT NULL</span>
    * lastName <span style="color:darkorange">VARCHAR(20)</span>
    * company <span style="color:darkorange">VARCHAR(50)</span>
