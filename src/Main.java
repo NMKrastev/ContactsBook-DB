@@ -43,6 +43,12 @@ public class Main {
                     break;
                 case 3:
                     System.out.println("Show contact information by its number");
+                    System.out.println("Enter phone number:");
+                    String contactPhone = scanner.next();
+                    boolean isNumberPresentInDB = contactsInterface.showContactByPhoneNumber(contactPhone);
+                    if (!isNumberPresentInDB) {
+                        System.out.println("Phone number does not correspond to any contact in the contacts book");
+                    }
                     break;
                 case 4:
                     System.out.println("Delete contact");
