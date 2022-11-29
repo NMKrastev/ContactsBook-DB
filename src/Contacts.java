@@ -39,15 +39,15 @@ public class Contacts implements ContactsInterface{
     public void showAllContacts() {
         try {
             Connection connection = DBConnection.createConnection();
-            String query = "select * from contacts";
+            String query = "select * from contacts order by firstName asc";
             Statement statement = connection.createStatement();
             ResultSet resultSet = statement.executeQuery(query);
             while (resultSet.next()) {
-                System.out.printf("Row number: %d; Name: %s; Last name: %s; Company: %s; Phone Number: %s; Email: %s; Age: %d",
-                        resultSet.getInt(1), resultSet.getString(2), resultSet.getString(3),
+                System.out.printf("First name: %s; Last name: %s; Company: %s; Phone Number: %s; Email: %s; Age: %d\n",
+                        resultSet.getString(2), resultSet.getString(3),
                         resultSet.getString(4), resultSet.getString(5), resultSet.getString(6),
                         resultSet.getInt(7));
-                System.out.println("-------------------------------------------------------------------------------------------");
+                System.out.println("------------------------------------------------------------------------------------------------------------------------------------------------------");
             }
         } catch (Exception e) {
             e.printStackTrace();

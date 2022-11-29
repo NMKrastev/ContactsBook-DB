@@ -2,7 +2,7 @@ import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
-        ContactsInterface ci = new Contacts();
+        ContactsInterface contactsInterface = new Contacts();
         Scanner scanner = new Scanner(System.in);
         System.out.println("Contacts Book Menu");
         while (true) {
@@ -30,7 +30,7 @@ public class Main {
                     System.out.println("Enter age: ");
                     int age = scanner.nextInt();
                     Contact contact = new Contact(firstName, lastName, company, phoneNumber, email, age);
-                    boolean isAdded = ci.addContact(contact);
+                    boolean isAdded = contactsInterface.addContact(contact);
                     if (isAdded) {
                         System.out.println("Contact added to the phonebook!");
                     } else {
@@ -39,6 +39,7 @@ public class Main {
                     break;
                 case 2:
                     System.out.println("Show all contacts information");
+                    contactsInterface.showAllContacts();
                     break;
                 case 3:
                     System.out.println("Show contact information by its number");
