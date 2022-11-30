@@ -105,6 +105,7 @@ public class Contacts implements ContactsInterface {
         } catch (Exception e) {
             e.printStackTrace();
         }
+        System.out.println();
     }
 
     @Override
@@ -120,6 +121,7 @@ public class Contacts implements ContactsInterface {
                         resultSet.getString(2), resultSet.getString(3),
                         resultSet.getString(4), resultSet.getString(5), resultSet.getString(6),
                         resultSet.getInt(7));
+                System.out.println();
                 isPhonePresent = true;
             }
         } catch (Exception e) {
