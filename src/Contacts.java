@@ -9,7 +9,7 @@ public class Contacts implements ContactsInterface {
         boolean isAdded = false;
         try {
             Connection connection = DBConnection.createConnection();
-            String query = "insert into contacts(firstName,lastName,company,phoneNumber,email,age) value(?,?,?,?,?,?)";
+            String query = "INSERT INTO contacts(firstName,lastName,company,phoneNumber,email,age) VALUE(?,?,?,?,?,?)";
             PreparedStatement preparedStatement = connection.prepareStatement(query);
             preparedStatement.setString(1, contact.getFirstName());
             preparedStatement.setString(2, contact.getLastName());
